@@ -1,0 +1,104 @@
+  
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+}
+
+/* -------------------------------------------------
+   Full-width title bar
+-------------------------------------------------- */
+
+.titleBar {
+  width: 100%;
+  min-width: 800px;              /* match fixed page width */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #c2dcde;
+  box-sizing: border-box;
+}
+
+/* fixed-width content inside the bar */
+.titleBar-inner {
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 15px 12px;
+  box-sizing: border-box;
+}
+
+/* main header layout */
+.titleRow {
+  display: flex;
+  align-items: center;
+}
+
+/* logo + page title group */
+.title-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;                     /* fixed spacing after logo */
+}
+
+/* page title */
+.title-left h2 {
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+  white-space: nowrap;
+}
+
+/* logo text (if used) */
+.logoText {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #555;
+  white-space: nowrap;
+}
+
+/* right-side menu */
+.buttonBox {
+  margin-left: auto;             /* pushes menu to the far right */
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* -------------------------------------------------
+   Page container (unchanged behaviour)
+-------------------------------------------------- */
+
+.page-container {
+  width: 800px;
+  margin: auto;
+  padding: 0;
+  background: white;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* -------------------------------------------------
+   Misc
+-------------------------------------------------- */
+
+.underline {
+  text-decoration: underline;
+}
+
+.emph {
+  font-weight: 600;
+  color: #222;
+}
+
+#bottomInfo {
+  text-align: left;
+  padding: 6px 15px;
+}
+
+.small-text {
+  font-size: 0.85em;
+}

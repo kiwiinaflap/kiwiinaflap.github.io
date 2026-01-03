@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>RC Servo Linkage Simulation and Tuning Tool</title>
+
+<meta name="description" content="Interactive servo linkage simulation and tuning tool for modelling RC servo arms, control horns, pushrod geometry, output curves, and mechanical mixing. Includes real-time graph and diagram.">
+
+<meta name="keywords" content="servo linkage, RC model, tuning tool, geometry simulation, pushrod mechanics, servo arm calculator, control horn travel">
+
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/index.css">
+
+</head>
+
+<body>
+
+  <!-- FULL-WIDTH TITLE BAR -->
+  <div class="titleBar">
+    <div class="titleBar-inner">
+      <div class="titleRow">
+        <div class="title-left">
+          <span class="logoText">kiwiinaflap</span>
+          <h2>Servo Linkage Tuner</h2>
+        </div>
+        <a href="controls.html" class="buttonBox">Controls</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIXED-WIDTH PAGE CONTENT -->
+  <div class="page-container">
+    <div class="diagram-area">
+      <canvas id="diagramCanvas" width="800" height="290"></canvas>
+      <canvas id="overlayCanvas" width="800" height="290"></canvas>
+    </div>
+
+    <div class="bottom-sections-container">
+      <div class="left-area">
+
+        <div id="controls">
+
+          <div class="sliderRow">
+            <label for="servoSlider">Sweep</label>
+            <input id="servoSlider" type="range" min="-50" max="50" step="1" value="0" style="flex:1">
+            <span id="sliderVal" style="width:30px; text-align:right">0</span>
+            <span class="unit">deg</span>
+            <button id="playPauseBtn">&#x25B6</button>
+          </div>
+
+          <!-- Converted to type="text" + inputmode="none" -->
+          <div class="paramRow">
+            <span class="label">Control surface hinge to servo arm AB</span>
+            <input id="BaseAB_len" type="text" inputmode="none" step="1" value="100" min="40" max="400">
+            <span class="unit">mm</span>
+          </div>
+
+          <div class="paramRow">
+            <span class="label">Servo vertical position</span>
+            <input id="ServoOffset_By0" type="text" inputmode="none" step="0.5" value="0" min="-25" max="25">
+            <span class="unit">mm</span>
+          </div>
+
+          <div class="paramRow">
+            <span class="label">Servo arm radius BC</span>
+            <input id="ServoArm_rad" type="text" inputmode="none" step="0.1" value="7" min="3" max="30">
+            <span class="unit">mm</span>
+          </div>
+
+          <div class="paramRow">
+            <span class="label">Servo arm angle</span>
+            <input id="ServoArm_deg" type="text" inputmode="none" step="1" value="-76" min="-150" max="150">
+            <span class="unit">deg</span>
+          </div>
+
+          <div class="paramRow">
+            <span class="label">Servo centre offset</span>
+            <input id="ServoOffset_deg" type="text" inputmode="none" step="1" value="0" min="-50" max="50">
+            <span class="unit">deg</span>
+          </div>
+
+          <div class="paramRow">
+            <span class="label">Control horn radius AD</span>
+            <input id="ConHorn_rad" type="text" inputmode="none" step="0.1" value="11" min="4" max="40">
+            <span class="unit">mm</span>
+          </div>
+
+          <div class="paramRow">
+            <span class="label">Control horn angle</span>
+            <input id="ConHorn_deg" type="text" inputmode="none" step="1" value="90" min="-135" max="135">
+            <span class="unit">deg</span>
+          </div>
+
+          <div class="paramRow">
+            <span class="label">Control surface width AE</span>
+            <input id="ConSurface_rad" type="text" inputmode="none" step="1" value="50" min="10" max="300">
+            <span class="unit">mm</span>
+          </div>
+
+          <!-- Output row -->
+          <div class="paramRow">
+            <span class="label">Connecting rod length CD</span>
+            <output id="ConRod_len"></output>
+            <span class="unit">mm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="right-area">
+        <canvas id="graphCanvas" width="300" height="300"></canvas>
+      </div>
+    </div>
+  
+    <div class="welcome-container">
+      <div id="bottomInfo">
+        <h4>Welcome!</h4>
+        <p>Experiment with servo arm lengths, control horn geometry, offsets, and more. Adjust any parameter and the diagram and graph update instantly to help you find your optimal setup. See Controls for details. If you'd like to support this project, you can message me on <a href="https://ko-fi.com/kiwiinaflap">ko-fi</a>. For feedback or questions, <a href="mailto:kiwiinaflap@hotmail.com">email</a> me. Hope you like, Cheers!</p>
+        <p>For best experience, use with a large screen.</p>
+        <p class="small-text">© 2026 kiwiinaflap</p>
+      </div>
+
+      <!-- Floating Slider Panel -->
+      <div id="sliderContent">
+        <div id="sliderContainer">
+
+          <!-- LEFT COLUMN (label + slider) -->
+          <div class="leftColumn">
+            <div id="sliderLabel">Label</div>
+            <div class="sliderRow1">
+              <button id="stepDownBtn" class="stepBtn">&#x25C0;</button>
+              <input type="range" id="masterSlider">
+              <button id="stepUpBtn" class="stepBtn">&#x25B6;</button>
+              <div id="sliderValue">0</div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN (nav buttons) -->
+          <div class="navColumn">
+            <button id="navUpBtn" class="navBtn">&#x25B2;</button>
+            <button id="navDownBtn" class="navBtn">&#x25BC;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ko-fi button -->
+      <div class="kofi-float-wrapper">
+        <a href="https://ko-fi.com/kiwiinaflap"
+        class="kofi-badge"
+        target="_blank"
+        rel="noopener"
+        aria-label="Buy me a coffee">
+        <img src="https://storage.ko-fi.com/cdn/cup-border.png"
+        alt=""
+        class="kofi-cup">
+        <span class="kofi-badge-text">Buy me a coffee</span>
+        </a>
+      </div>
+    </div>
+  </div>
+<script src="dist/servo-linkage-sim.obf.js"></script>
+</body>
+</html>

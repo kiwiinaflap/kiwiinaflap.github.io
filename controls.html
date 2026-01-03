@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>RC Servo Linkage Simulation and Tuning Tool</title>
+
+<meta name="description" content="Interactive servo linkage simulation and tuning tool for modelling RC servo arms, control horns, pushrod geometry, output curves, and mechanical mixing. Includes real-time graph and diagram.">
+
+<meta name="keywords" content="servo linkage, RC model, tuning tool, geometry simulation, pushrod mechanics, servo arm calculator, control horn travel">
+
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="css/common.css">
+</head>
+</html>
+<body>
+
+  <!-- FULL-WIDTH TITLE BAR -->
+  <div class="titleBar">
+    <div class="titleBar-inner">
+      <div class="titleRow">
+        <div class="title-left">
+          <span class="logoText">kiwiinaflap</span>
+          <h2>Servo Linkage Tuner</h2>
+        </div>
+        <a href="index.html" class="buttonBox">Home</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIXED-WIDTH PAGE CONTENT -->
+  <div class="page-container">
+    <div id="bottomInfo">
+        <p>For best experience, use with a large screen.</p>
+      <h4>Navigation</h4>
+        <p><span class="emph">Important:</span> Please use your browser's <span class="emph">'back'</span> button rather than <span class="underline"><span class="emph">Home</span></span> if you wish to keep your input parameter changes. <span class="underline"><span class="emph">Home</span></span> will return you to default settings.</p>
+      <h4>Diagram</h4>
+        <p>The diagram is drawn to scale for the following input parameters:</p>
+        <ul>
+          <li>Servo vertical position</li>
+          <li>Servo arm radius BC</li>
+          <li>Servo arm angle</li>
+          <li>Servo centre offset</li>
+          <li>Control horn radius AD</li>
+          <li>Control horn angle</li>
+        </ul>
+        <p>The diagram is NOT drawn to scale for the following input parameters:</p>
+        <ul>
+          <li>Control surface hinge to servo arm AB (servo moves, but not to scale)</li>
+          <li>Control surface width AE (remains fixed)</li>
+        </ul>
+        <p>All calculations are made according to parameter input settings, not to the drawing. This ensures all output information is accurate, regardless of the drawing.</p>
+        <p>Inevitably, there will be some combination of settings that will yield peculiar or bizzare results. Such settings are unlikely to be 'good' solutions to a well tuned setup and should be avoided. Fortunately, they will not break the simulation.</p>
+      <h4>Graph</h4>
+        <p>The graph shows how the angle of the control surface responds to the relative angle of the servo arm over a full sweep, typically from -50 to +50 deg. The angle of the control surface is plotted on the vertical Y axis (deg) against the relative angle of the servo arm on the horizontal X axis (deg).</p>
+      <h4>Sweep</h4>
+        <p>Use the 'Sweep' slider to manipulate the servo arm through its full range. The play ▶ button automates this function.</p>
+      <h4>Input Parameters</h4>
+        <p>Click or touch any input value to reveal the Control Panel. The panel can be dragged to a new location if desired. Use its slider or ◀ ▶ buttons to adjust the selected value. Move up or down the parameter list with the navigation ▲ ▼ buttons.</p>
+        <p>The servo can also be dragged to any location within the range of 'Control surface hinge to servo arm AB' and 'Servo vertical position'. The drag function includes fine stepping to enable precise positioning with small mouse movements. This function is disabled for mobile phones.</p>
+      <h4>Control surface hinge to servo arm AB</h4>
+        <p>Adjust the length between the control surface hinge point A and servo arm's pivot point B. Range 40 to 400 mm. The effect on control deflections is minimal beyond this range.</p>
+        <p>The diagram does not display the length AB to scale. The graph is not affected by this as all calculations use the parameter length AB, not the diagram's.</p>
+      <h4>Servo vertical position</h4>
+        <p>Move the servo up or down relative to the control surface datum line (horizontal line through point A). Range -25 to +25 mm.</p>
+      <h4>Servo arm radius BC</h4>
+        <p>Set the radius of the servo arm, length BC. Range 3 to 30 mm. Try to minimise the radius to maximise torque output, increasing it only as much as necessary to achieve the desired control surface range (plus margin) and to provide clearance for the connecting rod clevis.</p>
+      <h4>Servo arm angle</h4>
+        <p>Set the servo arm angle relative to the datum line. With reference to the diagram, an angle of 0 degrees is along the datum line to the right. From this datum, positive angles rotate the arm anti-clockwise and negative angles, clockwise. Range -150 to +150 degrees.</p>
+      <h4>Servo centre offset</h4>
+        <p>Shift the centre point of the servo to create unequal movement either side of centre. The offset is added to the normal sweep (-50 to +50 deg), eg. a 30 deg offset will cause a sweep of -20 to +80 deg. Offset provides mechanical differential, typically required for the setup of flaps, spoilers, retracts, etc.</p>
+      <h4>Control horn radius AD</h4>
+        <p>Set the radius of the control horn, length AD. Range 4 to 40 mm. If you have a choice, set the radius so that the control surface moves a little beyond the required range (plus margin).</p>
+      <h4>Control horn angle</h4>
+        <p>Set the control horn angle relative to the datum line. With reference to the diagram, an angle of 0 degrees is along the datum line to the right. From this datum, positive angles are measured anti-clockwise and negative angles, clockwise. Range -135 to -45 and +45 to +135 degrees.</p>
+      <h4>Control surface width AE</h4>
+        <p>Range 10 to 300 mm. Set the control surface width to see the corresponding maximum positive and negative control surface deflections, measured from point E. Should your control surface width lie outside the range, or if you wish to improve the resolution near the low end of the range, scale it: scale the width by some factor (eg x10) and divide the displayed deflection values by the same factor.</p>
+      <h4>Connecting rod length CD</h4>
+        <p>This is the calculated length of the connecting rod from point C to point D.</p>
+        <p class="small-text">© 2026 kiwiinaflap</p>
+    </div>
+  </div>
+</body>
+</html>
